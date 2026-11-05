@@ -1,0 +1,5 @@
+# Replace vault.example.com with your own domain.
+# Caddy obtains and renews the Let's Encrypt certificate automatically.
+vault.example.com {
+    reverse_proxy vaultwarden:80
+}

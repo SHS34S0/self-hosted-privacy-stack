@@ -1,0 +1,18 @@
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+    volumes:
+      - /etc/docker/volumes/adguard/adguard_work:/opt/adguardhome/work
+      - /etc/docker/volumes/adguard/adguard_conf:/opt/adguardhome/conf
+    networks:
+      wg:
+        ipv4_address: 10.42.42.43
+    # No "ports" section on purpose: AdGuard stays reachable only inside the
+    # wg network (i.e. over the VPN), which prevents open-resolver abuse.
+
+networks:
+  wg:
+    # The wg network already exists — it is created by the wg-easy stack.
+    external: true
